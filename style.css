@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700&family=DM+Mono:wght@400;500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f5f2eb;
+  --ink: #1a1a18;
+  --accent: #d64c2a;
+  --muted: #9e9b92;
+  --border: #c8c4b8;
+  --task-bg: #ffffff;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Mono', monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1.5rem;
+  gap: 0;
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 2.5rem;
+  height: 3px;
+  background: var(--accent);
+  margin-top: 0.6rem;
+}
+
+.addTask {
+  width: min(480px, 100%);
+  padding: 0.75rem 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.9rem;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-bottom: none;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.addTask::placeholder {
+  color: var(--muted);
+}
+
+.addTask:focus {
+  border-color: var(--ink);
+}
+
+.addButton {
+  width: min(480px, 100%);
+  padding: 0.75rem 1rem;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--bg);
+  border: 1.5px solid var(--ink);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-bottom: 2rem;
+}
+
+.addButton:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.taskContainer {
+  width: min(480px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.taskItem {
+  padding: 0.9rem 1rem;
+  background: var(--task-bg);
+  border: 1.5px solid var(--border);
+  border-bottom: none;
+  color: var(--ink);
+  font-size: 0.9rem;
+  transition: background 0.15s;
+}
+
+.taskItem:last-child {
+  border-bottom: 1.5px solid var(--border);
+}
+
+.taskItem:hover {
+  background: var(--bg);
+}
+
+/* ── Inline alert banner ── */
+.alert-banner {
+  width: min(480px, 100%);
+  padding: 0.7rem 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  border: 1.5px solid;
+  margin-bottom: 0.75rem;
+  display: none;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.alert-banner.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.alert-banner.fade-out {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.alert-banner.success {
+  background: #f0faf0;
+  border-color: #5a9e6f;
+  color: #2e6644;
+}
+
+.alert-banner.error {
+  background: #fff4f2;
+  border-color: var(--accent);
+  color: var(--accent);
+}
