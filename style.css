@@ -24,7 +24,6 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 4rem 1.5rem;
-  gap: 0;
 }
 
 h1 {
@@ -46,6 +45,7 @@ h1::after {
   margin-top: 0.6rem;
 }
 
+/* ── Input ── */
 .addTask {
   width: min(480px, 100%);
   padding: 0.75rem 1rem;
@@ -67,6 +67,7 @@ h1::after {
   border-color: var(--ink);
 }
 
+/* ── Add button ── */
 .addButton {
   width: min(480px, 100%);
   padding: 0.75rem 1rem;
@@ -79,8 +80,8 @@ h1::after {
   color: var(--bg);
   border: 1.5px solid var(--ink);
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-  margin-bottom: 2rem;
+  transition: background 0.2s, border-color 0.2s;
+  margin-bottom: 0.75rem;
 }
 
 .addButton:hover {
@@ -88,42 +89,11 @@ h1::after {
   border-color: var(--accent);
 }
 
-.taskContainer {
-  width: min(480px, 100%);
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  color: var(--muted);
-  font-size: 0.85rem;
+.addButton:active {
+  transform: scale(0.99);
 }
 
-.taskItem {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.9rem 1rem;
-  background: var(--task-bg);
-  border: 1.5px solid var(--border);
-  border-bottom: none;
-  color: var(--ink);
-  font-size: 0.9rem;
-  transition: background 0.15s;
-}
-
-.checkBoxBtn{
-  border: none;
-  height: 13px;
-  width: 13px;
-}
-
-.taskItem:last-child {
-  border-bottom: 1.5px solid var(--border);
-}
-
-.taskItem:hover {
-  background: var(--bg);
-}
-
-/* ── Inline alert banner ── */
+/* ── Alert banner ── */
 .alert-banner {
   width: min(480px, 100%);
   padding: 0.7rem 1rem;
@@ -158,4 +128,111 @@ h1::after {
   background: #fff4f2;
   border-color: var(--accent);
   color: var(--accent);
+}
+
+/* ── Task list ── */
+.taskContainer {
+  width: min(480px, 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Task item ── */
+.taskItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--task-bg);
+  border: 1.5px solid var(--border);
+  border-bottom: none;
+  color: var(--ink);
+  font-size: 0.88rem;
+  line-height: 1.4;
+  transition: background 0.15s, color 0.2s;
+}
+
+.taskItem:last-child {
+  border-bottom: 1.5px solid var(--border);
+}
+
+.taskItem:hover {
+  background: var(--bg);
+}
+
+/* Completed state */
+.taskItem:has(input[type="checkbox"]:checked) {
+  color: var(--muted);
+  background: var(--bg);
+  text-decoration: line-through;
+  text-decoration-color: var(--border);
+}
+
+/* ── Actions group (checkbox + delete) ── */
+.taskItem > div {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+/* ── Custom checkbox ── */
+.taskItem input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.taskItem input[type="checkbox"]:hover {
+  border-color: var(--ink);
+}
+
+.taskItem input[type="checkbox"]:checked {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.taskItem input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  width: 5px;
+  height: 9px;
+  border: 1.5px solid var(--bg);
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+/* ── Delete button ── */
+.deleteBtn {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.deleteBtn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: #fff4f2;
+}
+
+.deleteBtn:active {
+  transform: scale(0.97);
 }
