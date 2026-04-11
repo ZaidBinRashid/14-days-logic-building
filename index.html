@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>ToDo-App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>ToDo App</title>
 </head>
 <body>
-    <h1>ToDo App</h1>
-    <input type="text" placeholder="Add Task" class="addTask" id="AddTask">
-    <button type="button" class="addButton" id="AddButton">Add</button>
+  <h1>ToDo</h1>
+  <p class="subtitle">What needs doing?</p>
 
-    <div class="taskContainer" id="TaskContainer"> Tasks </div>
-    <script src="app.js"></script>
+  <div class="form-wrap">
+    <div class="alert-banner" id="AlertBanner"></div>
+    <p class="field-label">Task</p>
+    <input type="text" placeholder="e.g. Review the proposal…" class="addTask" id="AddTask">
+    <div class="row">
+      <input type="time" class="dueDate" id="DueDate">
+      <button type="button" class="addButton" id="AddButton">+ Add</button>
+    </div>
+  </div>
+
+<hr class="divider">
+
+  <div class="list-header">
+    <span class="list-title">Tasks</span>
+    <span class="list-count" id="CountLabel">0 remaining</span>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" id="ProgressBar" style="width: 0%"></div>
+  </div>
+
+  <div class="taskContainer" id="TaskContainer"></div>
+
+  <script src="app.js"></script>
 </body>
 </html>

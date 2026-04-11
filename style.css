@@ -32,47 +32,83 @@ h1 {
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
   margin-bottom: 2.5rem;
-  position: relative;
 }
 
-h1::after {
-  content: '';
-  display: block;
-  width: 2.5rem;
-  height: 3px;
-  background: var(--accent);
-  margin-top: 0.6rem;
-}
-
-/* ── Input ── */
-.addTask {
+/* ── Form ── */
+.form-wrap {
   width: min(480px, 100%);
-  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.field-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.addTask {
+  width: 100%;
+  padding: 0.8rem 1rem;
   font-family: 'DM Mono', monospace;
-  font-size: 0.9rem;
-  background: transparent;
+  font-size: 0.88rem;
+  background: var(--task-bg);
   border: 1.5px solid var(--border);
-  border-bottom: none;
   color: var(--ink);
   outline: none;
   transition: border-color 0.2s;
-}
-
-.addTask::placeholder {
-  color: var(--muted);
 }
 
 .addTask:focus {
   border-color: var(--ink);
 }
 
+.addTask::placeholder {
+  color: var(--muted);
+}
+
+/* ── Time + Button row ── */
+.row {
+  display: flex;
+  gap: 0;
+  margin-top: 8px;
+}
+
+.dueDate {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.88rem;
+  background: var(--task-bg);
+  border: 1.5px solid var(--border);
+  border-right: none;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.dueDate:focus {
+  border-color: var(--ink);
+  z-index: 1;
+  position: relative;
+}
+
 /* ── Add button ── */
 .addButton {
-  width: min(480px, 100%);
-  padding: 0.75rem 1rem;
+  padding: 0.8rem 1.4rem;
   font-family: 'Syne', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -81,7 +117,7 @@ h1::after {
   border: 1.5px solid var(--ink);
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
-  margin-bottom: 0.75rem;
+  white-space: nowrap;
 }
 
 .addButton:hover {
@@ -95,10 +131,11 @@ h1::after {
 
 /* ── Alert banner ── */
 .alert-banner {
-  width: min(480px, 100%);
+  width: 100%;
   padding: 0.7rem 1rem;
-  font-size: 0.82rem;
-  letter-spacing: 0.03em;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   border: 1.5px solid;
   margin-bottom: 0.75rem;
   display: none;
@@ -130,11 +167,65 @@ h1::after {
   color: var(--accent);
 }
 
+/* ── Divider ── */
+.divider {
+  width: min(480px, 100%);
+  border: none;
+  border-top: 1.5px solid var(--border);
+  margin: 1.5rem 0 1rem;
+}
+
+/* ── List header ── */
+.list-header {
+  width: min(480px, 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+}
+
+.list-title {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.list-count {
+  font-size: 0.68rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+/* ── Progress bar ── */
+.progress-bar-wrap {
+  width: min(480px, 100%);
+  height: 2px;
+  background: var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.4s ease;
+}
+
 /* ── Task list ── */
 .taskContainer {
   width: min(480px, 100%);
   display: flex;
   flex-direction: column;
+}
+
+/* ── Empty state ── */
+.empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  border: 1.5px dashed var(--border);
 }
 
 /* ── Task item ── */
@@ -143,14 +234,14 @@ h1::after {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.85rem 1rem;
+  padding: 0.9rem 1rem;
   background: var(--task-bg);
   border: 1.5px solid var(--border);
   border-bottom: none;
   color: var(--ink);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   line-height: 1.4;
-  transition: background 0.15s, color 0.2s;
+  transition: background 0.15s;
 }
 
 .taskItem:last-child {
@@ -158,27 +249,58 @@ h1::after {
 }
 
 .taskItem:hover {
-  background: var(--bg);
+  background: #faf8f4;
 }
 
-/* Completed state */
-.taskItem:has(input[type="checkbox"]:checked) {
+.taskItem.done {
   color: var(--muted);
   background: var(--bg);
   text-decoration: line-through;
   text-decoration-color: var(--border);
 }
 
-/* ── Actions group (checkbox + delete) ── */
-.taskItem > div {
+/* ── Task main content ── */
+.task-main {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.task-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.task-time {
+  font-size: 0.72rem;
+  color: var(--muted);
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 4px;
+}
+
+.task-time::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+/* ── Task actions ── */
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   flex-shrink: 0;
 }
 
 /* ── Custom checkbox ── */
-.taskItem input[type="checkbox"] {
+.task-actions input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   width: 16px;
@@ -191,16 +313,16 @@ h1::after {
   transition: border-color 0.15s, background 0.15s;
 }
 
-.taskItem input[type="checkbox"]:hover {
+.task-actions input[type="checkbox"]:hover {
   border-color: var(--ink);
 }
 
-.taskItem input[type="checkbox"]:checked {
+.task-actions input[type="checkbox"]:checked {
   background: var(--ink);
   border-color: var(--ink);
 }
 
-.taskItem input[type="checkbox"]:checked::after {
+.task-actions input[type="checkbox"]:checked::after {
   content: '';
   position: absolute;
   left: 3px;
@@ -213,12 +335,13 @@ h1::after {
   transform: rotate(45deg);
 }
 
-/* ── Delete button ── */
-.deleteBtn {
+/* ── Action buttons (Edit / Delete) ── */
+.action-btn {
   font-family: 'DM Mono', monospace;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.06em;
-  padding: 0.25rem 0.5rem;
+  text-transform: uppercase;
+  padding: 0.25rem 0.55rem;
   background: transparent;
   color: var(--muted);
   border: 1.5px solid var(--border);
@@ -227,12 +350,17 @@ h1::after {
   white-space: nowrap;
 }
 
-.deleteBtn:hover {
+.action-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.action-btn.del:hover {
   color: var(--accent);
   border-color: var(--accent);
   background: #fff4f2;
 }
 
-.deleteBtn:active {
+.action-btn:active {
   transform: scale(0.97);
 }
